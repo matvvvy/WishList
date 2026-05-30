@@ -1,0 +1,115 @@
+﻿<Application x:Class="Курсова_робота.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Курсова_робота"
+             StartupUri="Background.xaml">
+    <Application.Resources>
+        <!-- Стиль для звичайних кнопок без анімації та системного підсвічення -->
+        <Style x:Key="StaticRoundedButtonStyle" TargetType="Button">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <!-- Заокруглення кнопок з радіусом 15 -->
+                        <Border x:Name="border"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="15">
+                            <ContentPresenter HorizontalAlignment="Center" 
+                                      VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <!--Ефект при наведенні корсура(зміна прозорості)-->
+                            <Trigger Property="IsMouseOver" 
+                                     Value="True">
+                                <Setter TargetName="border" 
+                                        Property="Opacity" 
+                                        Value="0.8"/>
+                            </Trigger>
+                            <!-- Ефект при натисканні -->
+                            <Trigger Property="IsPressed" 
+                                     Value="True">
+                                <Setter TargetName="border" 
+                                        Property="Opacity" 
+                                        Value="0.6"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <!-- Стиль кнопки з амімацією масштабування -->
+        <Style x:Key="AnimationOnlyStyle" TargetType="Button">
+            <!-- Закруглення кнопок -->
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="15">
+                            <ContentPresenter HorizontalAlignment="Center" 
+                                              VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <!-- анімація кнопок -->
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Trigger.EnterActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <!-- Збільшення розміру на 0.2 сек-->
+                                <DoubleAnimation Storyboard.TargetProperty="(Button.RenderTransform).(ScaleTransform.ScaleX)" 
+                                                 To="1.05" 
+                                                 Duration="0:0:0.2"/>
+                                <DoubleAnimation Storyboard.TargetProperty="(Button.RenderTransform).(ScaleTransform.ScaleY)" 
+                                                 To="1.05" 
+                                                 Duration="0:0:0.2"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </Trigger.EnterActions>
+                    <Trigger.ExitActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <!-- Повернення до початковог розміру -->
+                                <DoubleAnimation Storyboard.TargetProperty="(Button.RenderTransform).(ScaleTransform.ScaleX)" 
+                                                 To="1" 
+                                                 Duration="0:0:0.2"/>
+                                <DoubleAnimation Storyboard.TargetProperty="(Button.RenderTransform).(ScaleTransform.ScaleY)" 
+                                                 To="1" 
+                                                 Duration="0:0:0.2"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </Trigger.ExitActions>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <!-- Стиль для плавного переходу сторвінки-->
+        <Style x:Key="FadeInPageStyle" TargetType="Page">
+            <Style.Triggers>
+                <EventTrigger RoutedEvent="Page.Loaded">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <!-- Плавна поява. Зміна прозорості-->
+                            <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                                     From="0.0" 
+                                     To="1.0" 
+                                     Duration="0:0:0.6"/>
+                            <!-- Легкий підйом знизу вгору-->
+                            <ThicknessAnimation Storyboard.TargetProperty="Margin"
+                                        From="0,30,0,-30" 
+                                        To="0,0,0,0" 
+                                        Duration="0:0:0.6">
+                                <ThicknessAnimation.EasingFunction>
+                                    <QuadraticEase EasingMode="EaseOut"/>
+                                </ThicknessAnimation.EasingFunction>
+                            </ThicknessAnimation>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Style.Triggers>
+        </Style>
+    </Application.Resources>
+</Application>

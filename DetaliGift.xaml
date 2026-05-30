@@ -1,0 +1,90 @@
+﻿<Window x:Class="Курсова_робота.DetaliGift"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Курсова_робота"
+        mc:Ignorable="d"
+        Title="DetaliGift" Height="450" Width="800">
+    <Grid>
+        <Border x:Name="mainBorder"
+                Background="White"
+                CornerRadius="20"
+                BorderBrush="#FF69B4"
+                BorderThickness="3"
+                Margin="10">
+        </Border>
+        <Grid Margin="20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="200"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Button x:Name="CloseDetali"
+                    Grid.Row="0"
+                    Content="Закрити"
+                    HorizontalAlignment="Right"
+                    FontFamily="Courier New"
+                    FontWeight="Bold"
+                    FontSize="12"
+                    Foreground="#FF69B4"
+                    Background="Transparent"
+                    BorderThickness="0"
+                    Click="CloseDetali_Click"
+                    Style="{StaticResource StaticRoundedButtonStyle}"/>
+            <Border 
+                Grid.Row="1"
+                CornerRadius="15"
+                Background="White"
+                Margin="0,10">
+                <Image x:Name="DetaliImage"
+                   Stretch="Uniform"
+                   Margin="10"/>
+            </Border>
+            <StackPanel Grid.Row="2"
+                        Margin="0,5">
+                <TextBlock x:Name="DetaliName"
+                           Text="Назва"
+                           FontFamily="Courier New"
+                           Foreground="#FF69B4"
+                           FontWeight="Bold"
+                           FontSize="20"/>
+                <TextBlock x:Name="DetaliPrice"
+                           Text="Ціна"
+                           FontFamily="Courier New"
+                           Foreground="#FF69B4"
+                           FontSize="18"
+                           Margin="0,5"/>
+            </StackPanel>
+            <Border Grid.Row="3"
+                        Background="White"
+                        CornerRadius="10"
+                        Padding="15"
+                        Margin="0,0,0,65" Grid.RowSpan="2">
+                <TextBlock x:Name="DetaliStatus"
+                               Text="Статус"
+                               FontFamily="Courier New"
+                               FontSize="15"
+                               Foreground="DimGray"/>
+            </Border>
+            <Button x:Name="DetaliLink"  
+                            Grid.Row="4"
+                            Content="Відкрити у магазині"
+                            FontFamily="Courier New"
+                            FontSize="15"
+                            FontWeight="Bold"
+                            Foreground="White"
+                            Background="#FF69B4"
+                            BorderBrush="Transparent" 
+                            Cursor="Hand"
+                            Height="40"
+                            Margin="0,10,0,20"
+                            Click="DetaliLink_Click"
+                            Style="{StaticResource AnimationOnlyStyle}"
+                            RenderTransformOrigin="0.5,0.5">
+            </Button>
+        </Grid>
+    </Grid>
+</Window>

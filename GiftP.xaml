@@ -1,0 +1,205 @@
+﻿<Page x:Class="Курсова_робота.GiftP"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Курсова_робота"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="GiftP"
+      Style="{StaticResource FadeInPageStyle}">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <!--- кнопка виходу -->
+        <DockPanel Grid.Row="0" 
+                   Margin="20,10">
+            <Button x:Name="BackButton" 
+                    Content="Вихід" 
+                    FontFamily="Courier New" 
+                    Width="80" 
+                    Background="White" 
+                    BorderBrush="Transparent"
+                    Click="BackButton_Click"
+                    Style="{StaticResource StaticRoundedButtonStyle}">
+            </Button>
+            <!--- Заголовок -->
+            <TextBlock Text="My Wishlist" 
+                       FontFamily="Courier New" 
+                       FontSize="26" 
+                       FontWeight="Bold" 
+                       Foreground="#FF69B4" 
+                       HorizontalAlignment="Center" 
+                       VerticalAlignment="Center"/>
+        </DockPanel>
+        <!--- Таблиця списку -->
+        <Border Grid.Row="1" 
+                Margin="20,10" 
+                CornerRadius="20" 
+                BorderBrush="#FF69B4" 
+                BorderThickness="2" 
+                Background="White">
+            <Grid>
+                <DataGrid x:Name="GiftsDataGrid"
+                      AutoGenerateColumns="False"
+                      Background="Transparent"
+                      BorderThickness="0"
+                      CanUserAddRows="False"
+                      GridLinesVisibility="None"
+                      FontFamily="Courier New"
+                      Margin="10">
+
+                    <DataGrid.Columns>
+                        <DataGridTextColumn 
+                        Header="Подарунок" 
+                        Binding="{Binding Name}" 
+                        Width="*"/>
+
+                        <DataGridTextColumn 
+                        Header="Категорія" 
+                        Binding="{Binding Category}"
+                        Width="120"/>
+
+                        <DataGridTextColumn 
+                        Header="Ціна" 
+                        Binding="{Binding Price}" 
+                        Width="80"/>
+
+                        <DataGridTextColumn x:Name="ReservedColumn"
+                        Header="Cтатус" 
+                        Binding="{Binding Status}"
+                        IsReadOnly="True"                   
+                        Width="*"/>
+                        <DataGridTextColumn x:Name="GiverColumn" 
+                    Header="Хто дарує" 
+                    Binding="{Binding ReservedBy}" 
+                    IsReadOnly="True" 
+                    Width="*"/>
+                        <DataGridTemplateColumn
+                        Header="🐾"
+                        Width="*">
+                            <!--- Кнопка виводу деталів подарунку -->
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button x:Name="OpenDetali"
+                                    Content="Переглянути"
+                                    FontFamily="Courier New"
+                                    Foreground="#FF69B4"
+                                    Background="Transparent"
+                                    BorderThickness="0"
+                                    FontWeight="Bold"
+                                    Cursor="Hand"
+                                    Click="OpenDetali_Click">
+                                        <Button.Resources>
+                                            <Style TargetType="Border">
+                                                <Setter Property="CornerRadius"
+                                                    Value="10"/>
+                                            </Style>
+                                        </Button.Resources>
+                                    </Button>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+                <!--- Вхідне вікно, коли список ще порожній -->
+                <StackPanel x:Name="StartPanel"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Center"
+                        Visibility="Collapsed">
+                    <TextBlock Text="😸"
+                           FontSize="50"
+                           HorizontalAlignment="Center"
+                           Margin="10"/>
+                    <TextBlock Text="Список порожній!"
+                           FontFamily="Courier New"
+                           FontSize="20"
+                           FontWeight="Bold"
+                           Foreground="#FF69B4"
+                           HorizontalAlignment="Center"/>
+                    <TextBlock x:Name="AdminStartPanel"
+                           Text="Додайте свій перший подарунок"
+                           FontFamily="Courier New"
+                           FontSize="20"
+                           Foreground="DimGray"
+                           FontWeight="Bold"
+                           HorizontalAlignment="Center"
+                           Margin="0,5,0,0"/>
+                    <TextBlock x:Name="UserStartPanel"
+                               Text="Отримувач ще складає список.&#x0a;Зазирніть сюди трішки згодом!✨"
+                               FontFamily="Courier New"
+                               FontSize="20"
+                               Foreground="DimGray"
+                               FontWeight="Bold"
+                               HorizontalAlignment="Center"
+                               TextAlignment="Center"
+                               Margin="0,5,0,0"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+        <!--- Панель кнопок операцій над елементами -->
+        <StackPanel Grid.Row="2" 
+                    Orientation="Horizontal" 
+                    HorizontalAlignment="Center" 
+                    Margin="0,10,0,30">
+
+            <Button x:Name="AddGiftButton" 
+                    Content="Додати" 
+                    FontFamily="Courier New"
+                    FontSize="15"
+                    Width="120" 
+                    Height="45" 
+                    Margin="10,0" 
+                    BorderBrush="Transparent"
+                    Background="White" Click="AddGiftButton_Click"
+                    Style="{StaticResource StaticRoundedButtonStyle}">
+            </Button>
+
+            <Button x:Name="DeleteGiftButton" 
+                    Content="Видалити" 
+                    FontFamily="Courier New"
+                    FontSize="15"
+                    Width="120" 
+                    Height="45" 
+                    Margin="10,0"
+                    BorderBrush="Transparent"
+                    Background="White" Click="DeleteGiftButton_Click"
+                    Style="{StaticResource StaticRoundedButtonStyle}">
+            </Button>
+            <Button x:Name="CancelRes"
+                    Content="Скасувати бронь"
+                    FontFamily="Courier New"
+                    FontSize="15"
+                    Width="160"
+                    Height="45"
+                    Margin="10,0,10,0"
+                    Background="White"
+                    BorderBrush="Transparent"
+                    Click="CancelRes_Click"
+                    Style="{StaticResource StaticRoundedButtonStyle}">
+            </Button>
+            <Button x:Name="ReservedButton" 
+                    Content="Забронювати ♥" 
+                    Foreground="White" 
+                    FontFamily="Courier New" 
+                    FontSize="18" 
+                    Width="160" 
+                    Height="45" 
+                    Margin="20,0,10,0" 
+                    Background="#FF69B4"
+                    BorderBrush="Transparent"
+                    Click="ReservedButton_Click"
+                    Style="{StaticResource AnimationOnlyStyle}"
+                    RenderTransformOrigin="0.5,0.5">
+                <Button.RenderTransform>
+                    <ScaleTransform ScaleX="1"
+                                    ScaleY="1"/>
+                </Button.RenderTransform>
+            </Button>
+        </StackPanel>
+    </Grid>
+</Page>

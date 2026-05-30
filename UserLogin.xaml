@@ -1,0 +1,72 @@
+﻿<Page x:Class="Курсова_робота.UserLogin"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Курсова_робота"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="UserLogin"
+      Style="{StaticResource FadeInPageStyle}">
+    <Grid>
+        <Button x:Name="BackUserButton"
+            Content="Вихід" 
+            Click="BackUserButton_Click"
+            Width="100" Height="35"
+            HorizontalAlignment="Left" 
+            VerticalAlignment="Top" 
+            Margin="20"
+            Background="White"
+            BorderBrush="Transparent"
+            FontFamily="Courier New"
+            Style="{StaticResource StaticRoundedButtonStyle}">
+        </Button>
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <TextBlock Text="Вхід"
+                             FontFamily="Courier New"
+                             FontSize="30"
+                             Foreground="#FF69B4"  
+                             FontWeight="Bold"
+                             HorizontalAlignment="Center"
+                             Margin="0,0,0,30"/>
+            <TextBlock Text="Ваше ім'я:"
+                       FontFamily="Courier New"
+                       FontSize="15"
+                       Foreground="Gray"
+                       HorizontalAlignment="Center"
+                       Margin="0,0,0,5"/>
+            <Border CornerRadius="15"
+                    BorderBrush="#FF69B4"
+                    Background="White"
+                    BorderThickness="1.5"
+                    Height="35"
+                    Margin="0,0,0,20">
+                <TextBox x:Name="UserNameBox"
+                        Foreground="Black"
+                        BorderThickness="0"
+                        Background="Transparent"
+                        VerticalAlignment="Center"
+                        Margin="10,0,10,0"/>
+            </Border>
+            <Button x:Name="UserExitButton"
+                    Content="Увійти"
+                    Foreground="White"
+                    Background="#FF69B4"
+                    FontFamily="Courier New"
+                    FontWeight="Bold"
+                    FontSize="15"
+                    Width="150"
+                    Height="40"
+                    BorderBrush="Transparent"
+                    HorizontalAlignment="Center" 
+                    Click="UserExitButton_Click"
+                    Style="{StaticResource AnimationOnlyStyle}"
+                    RenderTransformOrigin="0.5,0.5">
+                <Button.RenderTransform>
+                    <ScaleTransform ScaleX="1"
+                                    ScaleY="1"/>
+                </Button.RenderTransform>
+            </Button>
+        </StackPanel>
+    </Grid>
+</Page>
